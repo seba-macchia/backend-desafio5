@@ -1,62 +1,61 @@
-class GestorProductos {
+class ProductManager {
   constructor() {
-    this.listaProductos = [];
-    this.ultimoIdProducto = 0;
+    this.productsList = [];
+    this.lastProductId = 0;
   }
 
-  agregarProducto(nombre, descripcion, precio, imagen, codigo, stock) {
-    const nuevoProducto = {
-      id: ++this.ultimoIdProducto,
-      nombre,
-      descripcion,
-      precio,
-      imagen,
-      codigo,
-      stock,
-    };
-
-    const productoExistente = this.listaProductos.find(producto => producto.codigo === codigo);
-    if (productoExistente) {
-      throw new Error("El código ya existe");
-    }
-
-    if (!nombre || !descripcion || !precio || !imagen || !codigo || !stock) {
+  addProduct(title, description, price, thumbnail, code, stock) {
+    if (!title || !description || !price || !thumbnail || !code || !stock) {
       console.log("Todos los campos son obligatorios");
       return;
     }
 
-    this.listaProductos.push(nuevoProducto);
-  }
-
-  obtenerProductos() {
-    return this.listaProductos;
-  }
-
-  obtenerProductoPorId(id) {
-    const producto = this.listaProductos.find(producto => producto.id === id);
-    if (!producto) {
-      throw new Error("Producto no encontrado");
+    if (this.productsList.some(product => product.code === code)) {
+      throw new Error("El código ya existe");
     }
-    return producto;
+
+    const newProduct = {
+      id: ++this.lastProductId,
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+    };
+
+    this.productsList.push(newProduct);
+  }
+
+  getProducts() {
+    return this.productsList;
+  }
+
+  getProductById(id) {
+    const product = this.productsList.find(product => product.id === id);
+    if (!product) {
+      throw new Error("Not found");
+    }
+    return product;
   }
 }
 
 // Pruebas
-const gestorProductos = new GestorProductos();
+const productManager = new ProductManager();
 
 // Prueba 1
 console.log("Prueba 1:");
-console.log("Productos iniciales:", gestorProductos.obtenerProductos());
+console.log("Productos iniciales:", productManager.getProducts());
 
 // Prueba 2
 console.log("\nPrueba 2:");
-gestorProductos.agregarProducto("Producto 1", "Descripción del producto 1", 100, "Imagen 1", "abc123", 20);
-console.log("Productos después de agregar uno:", gestorProductos.obtenerProductos());
+productManager.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
+console.log("Productos después de agregar uno:", productManager.getProducts());
 
 // Prueba 3
 console.log("\nPrueba 3:");
 try {
-  gestorProductos.agregarProducto("Producto 2", "Descripción del producto 2", 150, "Imagen 2", "abc123", 25);
+  productManager.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
 } catch (error) {
   console.error(error.message);
 }
@@ -64,8 +63,8 @@ try {
 // Prueba 4
 console.log("\nPrueba 4:");
 try {
-  const productoEncontrado = gestorProductos.obtenerProductoPorId(1);
-  console.log("Producto encontrado por ID:", productoEncontrado);
+  const foundProduct = productManager.getProductById(1);
+  console.log("Producto encontrado por ID:", foundProduct);
 } catch (error) {
   console.error(error.message);
 }
@@ -73,8 +72,8 @@ try {
 // Prueba 5
 console.log("\nPrueba 5:");
 try {
-  const productoNoEncontrado = gestorProductos.obtenerProductoPorId(999);
-  console.log("Producto encontrado por ID:", productoNoEncontrado);
+  const notFoundProduct = productManager.getProductById(999);
+  console.log("Producto encontrado por ID:", notFoundProduct);
 } catch (error) {
   console.error(error.message);
 }
