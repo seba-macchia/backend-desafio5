@@ -1,0 +1,39 @@
+[
+  {
+    "id": "ef74a2aa-1fab-4052-a5e4-4ab7f4ddb949",
+    "title": "arroz",
+    "description": "Muy sabroso",
+    "price": 250,
+    "thumbnail": "/",
+    "code": "L54",
+    "stock": 55,
+    "status": true,
+    "category": "alimentos"
+  },
+  {
+    "id": "a296d2af-e95d-4992-9d20-2f6c383b9af7",
+    "title": "Lentejas",
+    "description": "Muy sabroso",
+    "price": 340,
+    "thumbnail": "/",
+    "code": "L55",
+    "stock": 75,
+    "status": false,
+    "category": "alimentos"
+  },
+  {
+    "id": "3611bd66-fb39-4996-a98b-c237e6bb7bc5",
+    "status": true
+  },
+  {
+    "id": "0772d0db-381a-4960-8ed8-234c46b61c62",
+    "title": "arroz",
+    "description": "Muy sabroso",
+    "price": 250,
+    "thumbnail": "/",
+    "code": "L54",
+    "stock": 55,
+    "status": true,
+    "category": "alimentos"
+  }
+]
